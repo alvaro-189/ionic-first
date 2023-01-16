@@ -1,0 +1,81 @@
+<ion-header [translucent]="true">
+    <ion-toolbar color="secondary">
+        <ion-title>
+            Lista de contactos
+        </ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+    <ion-header collapse="condense">
+        <ion-toolbar>
+            <ion-title size="large">Lista de contactos</ion-title>
+        </ion-toolbar>
+    </ion-header>
+
+    <div id="container">
+
+        <h1>Añadir contacto</h1>
+
+        <ion-item>
+            <ion-label position="stacked">Nombre completo:</ion-label>
+            <ion-input [(ngModel)]="nombre"></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-label position="stacked">Telefono:</ion-label>
+            <ion-input [(ngModel)]="telefono"></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-label position="stacked">Email:</ion-label>
+            <ion-input [(ngModel)]="email"></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-label position="stacked">Notas</ion-label>
+            <ion-textarea [(ngModel)]="notas"></ion-textarea>
+        </ion-item>
+
+        <ion-button style="width: 100%" (click)="addContacto()">
+            <ion-icon name="add-circle-outline"></ion-icon>
+        </ion-button>
+
+        <div *ngIf="contactos.length > 0">
+            <h2>MIS CONTACTOS</h2>
+            <h3>Álvaro Emmanuel Herrera Anda</h3>
+            <ion-item>
+                <ion-label> VER NOTAS</ion-label>
+                <ion-toggle [(ngModel)]="toggle" color="secondary"></ion-toggle>
+            </ion-item>
+        </div>
+
+        <div *ngIf="contactos.length === 0">
+            <h2>NO SE HAN AÑADIDO CONTACTOS</h2>
+        </div>
+
+
+        <ion-list>
+            <ion-item *ngFor="let cont of contactos; let i = index">
+                <ion-card class="cards">
+                    <div>
+                        <h2>{{cont.name}}</h2>
+                        <ion-label>{{cont.tel}}</ion-label>
+                        <ion-label>{{cont.correo}}</ion-label>
+                        <ion-label *ngIf="toggle === true">{{cont.note}}</ion-label>
+                    </div>
+                    <ion-button id="deleteBtn" color="danger" (click)="alertConfirm(i)">
+                        <ion-icon name="trash-outline"></ion-icon>
+                    </ion-button>
+                </ion-card>
+
+            </ion-item>
+
+
+        </ion-list>
+
+
+
+
+    </div>
+</ion-content>
